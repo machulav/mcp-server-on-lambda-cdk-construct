@@ -1,22 +1,21 @@
 # mcp-server-on-lambda-cdk-construct
 
-[![NPM version](https://badge.fury.io/js/mcp-server-on-lambda-cdk-construct.svg)](https://badge.fury.io/js/mcp-server-on-lambda-cdk-construct)
 
 Level-3 CDK construct that deploys an MCP server as an AWS Lambda function
 fronted by an API Gateway REST API.
 
 ## Installation
 
-From npm:
+From the public GitHub repository:
 
 ```bash
-npm install mcp-server-on-lambda-cdk-construct
+npm install github:owner/mcp-server-on-lambda-cdk-construct
 ```
 
 From a private repository in the same GitHub organization:
 
 ```bash
-npm install git+https://github.com/ORG/mcp-server-on-lambda-cdk-construct.git
+npm install git+ssh://git@github.com/ORG/mcp-server-on-lambda-cdk-construct.git
 ```
 
 ## Usage
