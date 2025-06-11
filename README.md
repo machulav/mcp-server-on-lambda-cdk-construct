@@ -67,3 +67,10 @@ jobs:
 ```
 
 See the [`example/`](./example) directory for a minimal app.
+
+## Continuous integration
+
+The repository ships with a small GitHub Actions workflow defined in
+`.github/workflows/build.yml`. It installs dependencies, compiles the
+TypeScript sources and runs the tests for each pull request. This helps catch
+build or test failures before changes are merged.
