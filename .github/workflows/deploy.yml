@@ -1,0 +1,44 @@
+name: deploy
+on:
+  workflow_call:
+    inputs:
+      aws-access-key-id:
+        required: true
+        type: string
+      aws-secret-access-key:
+        required: true
+        type: string
+      aws-region:
+        required: true
+        type: string
+      context:
+        required: false
+        type: string
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: CDK Bootstrap
+        env:
+          AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+          AWS_REGION: ${{ inputs.aws-region }}
+        run: npx cdk bootstrap
+      - name: CDK Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+          AWS_REGION: ${{ inputs.aws-region }}
+          CONTEXT: ${{ inputs.context }}
+        run: |
+          CMD="npx cdk deploy --require-approval never"
+          if [ -n "$CONTEXT" ]; then
+            CMD="$CMD -c $CONTEXT"
+          fi
+          $CMD
